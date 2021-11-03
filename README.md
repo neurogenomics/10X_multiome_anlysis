@@ -33,4 +33,6 @@ Original sequencing run of ATAC library: Does not look good. Per Sequence GC Con
 Rerun of ATAC library with dark cycles: Looks a lot better. In terms of the reads not aligning well to the reference genome: R1/R3: These should align to the reference, R2: Contains cell barcode sequence, so don't expect these to map well to the reference.
 
 ### Web summary of cell ranger -arc 
+download to view as it is .html format
 Web summary: differed from expectation as aimed for 3000 cells but web summary reported 7134 instead, hence ran cellranger -arc count with --min-gex-count=500 --min-atac-count=1000. Warning messages were present but didn’t error so downstream analysis could still be done on the sequenced sample.
+
