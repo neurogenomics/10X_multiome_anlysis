@@ -53,7 +53,46 @@ Note that BRC will likely send you the GEX and ATAC files separately, so you nee
 ## Using cell ranger arc 
 [Cell ranger arc](https://support.10xgenomics.com/single-cell-multiome-atac-gex/software/downloads/latest) must be used for 10X multime GEX + ATAC seq 
 We recommend downloading and [installing](https://support.10xgenomics.com/single-cell-multiome-atac-gex/software/pipelines/latest/installation) your own version instead of using the one on lab shared tools. 
+Cell ranger arc must be added to your system PATH before using. There are 2 ways to setting it up. 
+### 1.	Create a **.bash** script that you reference/ call in when you qsub your **.pbs** script on the cluster 
 
+Example 
+
+```
+export PATH=/rds/general/user/xyz16/home/cellranger-arc-2.0.0:$PATH
+cellranger-arc count --id=10X_human_sc_multiome_1_output --reference=/rds/general/user/xyz16/home/refdata-cellranger-arc-GRCh38-2020-A-2.0.0 --libraries=/rds/general/user/xyz16/home/human_sc_multiome_1.csv --localcores=16 --localmem=64
+```
+In this case, your **.pbs** file needs to look like the below, and you can run it on the PBS cluster via ```qsub yourtitle.pbs```. 
+```
+#PBS -l walltime=24:00:00
+#PBS -l select=1:ncpus=16:mem=64gb
+module load anaconda3/personal
+cd $PBS_O_WORKDIR
+bash cell_ranger_arc_bash.sh
+```
+
+### 2. Use a .bashrc script 
+Create a .bashrc script via Where you add cell ranger arc to your path i.e. see below
+![image](https://user-images.githubusercontent.com/53938505/140020226-e680e207-a960-4196-9729-b09acae72870.png)
+
+Once you do this, your system knows to where to look for your cell ranger count all the time. And your **.pbs** file can look like so:
+```
+#!/bin/bash
+#PBS -l walltime=24:00:00
+#PBS -l select=1:ncpus=16:mem=64gb
+#PBS -j oe
+#PBS -o cellranger.log
+
+source ~/.bashrc
+
+cd /rds/general/user/mt2920/home/Multiome_analysis/cellranger-arc
+cellranger-arc count --id=reseq_multiome_060921 \
+                     --reference=/rds/general/user/mt2920/home/Multiome_analysis/cellranger-arc/referencedata/refdata-cellranger-arc-mm10-2020-A-2.0.0 \
+                     --libraries=/rds/general/user/mt2920/home/Multiome_analysis/cellranger-arc/multiome_libraries.csv \
+                     --localcores=16 \
+                     --localmem=64
+```
+These are 2 ways to add cell ranger to your PATH and running it. You can pick either 1. 
 
 
 ### Web summary of cell ranger -arc 
