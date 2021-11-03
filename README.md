@@ -93,7 +93,7 @@ cellranger-arc count --id=reseq_multiome_060921 \
                      --localmem=64
 ```
 These are 2 ways to add cell ranger to your PATH and running it. You can pick either 1. 
-
+***Please note the memory and ncpus parameters here are just for reference, this is not and should not be the same for different sequencing runs due to sequencing depth etc. This is something you need to figure out yourself, however the minimum recommandation is 64gb.***
 
 ### Web summary of cell ranger -arc 
 Web summary: differed from expectation as aimed for 3000 cells but web summary reported 7134 instead, hence ran cellranger -arc count with --min-gex-count=500 --min-atac-count=1000. Warning messages were present but didn’t error so downstream analysis could still be done on the sequenced sample.
