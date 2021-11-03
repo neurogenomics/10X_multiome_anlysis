@@ -16,6 +16,7 @@ Bioanalyser traces of multiome protocol on 10mg rotenone/vehicle rat SN (500 tar
 Bioanalyser traces of multiome protocol on 10mg rotenone/vehicle rat SN (9000 targeted nuclei). Looks like transposition didn’t work so ATAc traces only show PCR bubble. cDNA very low so GEX library (RNA library) unlikely to be great.
 
 ## Sequencing 
+### download to view as it is .html format
 The sample sequencing files are all named 1.SEQ.xxxx similar to the bioanalyser files. There are 4 sequencing files numbered 1.SE.xxx to 4.SEQ.xxx. There is also the web summary of cell ranger arc. 
 
 ### 1 
@@ -32,7 +33,30 @@ Original sequencing run of ATAC library: Does not look good. Per Sequence GC Con
 ### 4 
 Rerun of ATAC library with dark cycles: Looks a lot better. In terms of the reads not aligning well to the reference genome: R1/R3: These should align to the reference, R2: Contains cell barcode sequence, so don't expect these to map well to the reference.
 
+## Download the sequencing data 
+Sequenced with BCR: 
+BCR provides zipped folders for sequencing runs that could be transferred for ICL’s HPC cluster users using iRODS server. 
+Here is a [link](https://imperial-genomics-facility.github.io/igf-pipeline-help/data_access.html#data-access-via-irods-server) for data assess details.
+We recommended command line transfer by first setting up the irods server. 
+
+Potential error is that ```mkdir –p ~/.irods``` could fail. In this case, 
+1.	Either use ```nano irods``` on HPC home dir 
+2.	Type configuration on command line when prompted
+You should be able to proceed then. 
+
+BRC will also provide fastQC files of your sequencing, this is data describing the quality of your sequencing run 
+Some explanation and examples are included in below session seqencing. 
+
+Note that BRC will likely send you the GEX and ATAC files separately, so you need to wait for both before running cell ranger arc. 
+
+
+## Using cell ranger arc 
+[Cell ranger arc](https://support.10xgenomics.com/single-cell-multiome-atac-gex/software/downloads/latest) must be used for 10X multime GEX + ATAC seq 
+We recommend downloading and [installing](https://support.10xgenomics.com/single-cell-multiome-atac-gex/software/pipelines/latest/installation) your own version instead of using the one on lab shared tools. 
+
+
+
 ### Web summary of cell ranger -arc 
-download to view as it is .html format
 Web summary: differed from expectation as aimed for 3000 cells but web summary reported 7134 instead, hence ran cellranger -arc count with --min-gex-count=500 --min-atac-count=1000. Warning messages were present but didn’t error so downstream analysis could still be done on the sequenced sample.
+
 
