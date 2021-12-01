@@ -49,6 +49,24 @@ Some explanation and examples are included in below session seqencing.
 
 Note that BRC will likely send you the GEX and ATAC files separately, so you need to wait for both before running cell ranger arc. 
 
+Sequenced with Novagene: 
+Novagene will email you the downloading link and information to log in. If you are downloading the data to HPC then simply using ```wget [downloading link provided]``` will suffice. 
+Novagene also provides the MD5 code for each **.zip** file and the **.fastq.gz** within them. 
+An MD5 checksum is a 32-character hexadecimal number that is computed on a file. If two files have the same MD5 checksum value, it is highly probable that the two files are the same. It is generally used to check data integrity.
+All MD5 values are recorded in “MD5.txt”. Here is an example:
+
+**MD5 value · File name** 
+
+**861128e640713f2d76df35bc75bf41 · sample_1.fq.gz**
+```
+For Linux/mac users:
+Step 1 Open your “Terminal”
+Step 2 Change directory to your data_release path 
+Step 3 Use command: md5sum filename
+```
+Check that it is the same with the provided .txt file. 
+This guide shows how to check the integrity of released files. It is advised that you download all files without changing their directories. You can change it after you downloaded them, but after you ```mvz``` or ```cp``` them to a different dir, it is best to double check the MD5 value again. This is very important!
+
 
 ## Using cell ranger arc 
 [Cell ranger arc](https://support.10xgenomics.com/single-cell-multiome-atac-gex/software/downloads/latest) must be used for 10X multime GEX + ATAC seq 
